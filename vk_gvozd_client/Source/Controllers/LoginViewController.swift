@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  vk_gvozd_client
 //
 //  Created by Anton Gvozdanov on 10/09/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,40 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
-        guard let login = loginTextField.text else {
-            titleLabel.text = "wrong login! try again."
-            return }
-        guard let password = passwordTextField.text else {
-            titleLabel.text = "wrong password! try again."
-            return }
         
-        // если текста нет совсем возвращает string "" а не nil
-        // делаем бордюры красным подсвечивая не заполненные поля и убираем подсветку если поля заполнены.
-        if login == "" {
-            loginTextField.layer.borderColor = UIColor.red.cgColor
-            loginTextField.layer.borderWidth = 1.0
-            loginTextField.placeholder = "wrong login!"
-        } else {
-            loginTextField.layer.borderColor = UIColor.black.cgColor
-            loginTextField.layer.borderWidth = 0.0
-        }
-        
-        if password == "" {
-            passwordTextField.layer.borderColor = UIColor.red.cgColor
-            passwordTextField.layer.borderWidth = 1.0
-            passwordTextField.placeholder = "wrong pasword!"
-        } else {
-            passwordTextField.layer.borderColor = UIColor.black.cgColor
-            passwordTextField.layer.borderWidth = 0.0
-        }
-        //Конец области подсветки
-        
-        if login == "AntonGwozd" && password == "123456" {
-            titleLabel.text = "accept"
-            
-        } else {
-            titleLabel.text = "wrong! try again."
-        }
     }
     
     override func viewDidLoad() {
@@ -63,13 +30,16 @@ class ViewController: UIViewController {
         passwordLabel.text = "Password:"
         loginTextField.placeholder = "login"
         passwordTextField.placeholder = "password"
+        passwordTextField.isSecureTextEntry = true
         loginButton.setTitle("Log In", for: .normal)
         
         //Распознователь жестов
         let hideKeyboardGestute = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         //добавляем распознователь в скрол вью
         scrollView.addGestureRecognizer(hideKeyboardGestute)
-    }
+        
+        
+    }	
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -101,5 +71,60 @@ class ViewController: UIViewController {
     @objc func hideKeyboard() {
         self.scrollView?.endEditing(true)
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let userDataRight = checkLoginData()
+        if identifier == "fromLoginController" {
+            if !userDataRight {
+                showEnterError()
+            }
+            return true
+        }
+        return false
+    }
+    
+    func checkLoginData () -> Bool {
+        guard let login = loginTextField.text else {
+            titleLabel.text = "wrong login! try again."
+            return false}
+        guard let password = passwordTextField.text else {
+            titleLabel.text = "wrong password! try again."
+            return false}
+        
+        hideKeyboard()
+        
+        
+        // если текста нет совсем возвращает string "" а не nil
+        // делаем бордюры красным подсвечивая не заполненные поля и убираем подсветку если поля заполнены.
+        if login == "" {
+            loginTextField.layer.borderColor = UIColor.red.cgColor
+            loginTextField.layer.borderWidth = 1.0
+            loginTextField.placeholder = "wrong login!"
+        } else {
+            loginTextField.layer.borderColor = UIColor.black.cgColor
+            loginTextField.layer.borderWidth = 0.0
+        }
+        
+        if password == "" {
+            passwordTextField.layer.borderColor = UIColor.red.cgColor
+            passwordTextField.layer.borderWidth = 1.0
+            passwordTextField.placeholder = "wrong pasword!"
+        } else {
+            passwordTextField.layer.borderColor = UIColor.black.cgColor
+            passwordTextField.layer.borderWidth = 0.0
+        }
+        //Конец области подсветки
+        
+        return login == "AntonGwozd" && password == "123456"
+    }
+    
+    func showEnterError() {
+        let alert = UIAlertController(title: "Error!", message: "Введены неверные пользовательские данные", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
+    
 }
 

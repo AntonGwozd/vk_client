@@ -7,17 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0631286D232FE24900272604 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631286C232FE24900272604 /* FriendsViewController.swift */; };
+		0631286F232FE28100272604 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0631286E232FE28100272604 /* GroupsViewController.swift */; };
+		06312871232FE2A900272604 /* GroupAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06312870232FE2A900272604 /* GroupAddViewController.swift */; };
+		06312873232FE2D300272604 /* FriendFtotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06312872232FE2D300272604 /* FriendFtotoViewController.swift */; };
 		06700D79232808840009B739 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06700D78232808840009B739 /* AppDelegate.swift */; };
-		06700D7B232808840009B739 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06700D7A232808840009B739 /* ViewController.swift */; };
+		06700D7B232808840009B739 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06700D7A232808840009B739 /* LoginViewController.swift */; };
 		06700D7E232808840009B739 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06700D7C232808840009B739 /* Main.storyboard */; };
 		06700D80232808860009B739 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06700D7F232808860009B739 /* Assets.xcassets */; };
 		06700D83232808860009B739 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06700D81232808860009B739 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0631286C232FE24900272604 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		0631286E232FE28100272604 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		06312870232FE2A900272604 /* GroupAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddViewController.swift; sourceTree = "<group>"; };
+		06312872232FE2D300272604 /* FriendFtotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFtotoViewController.swift; sourceTree = "<group>"; };
 		06700D75232808840009B739 /* vk_gvozd_client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vk_gvozd_client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06700D78232808840009B739 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		06700D7A232808840009B739 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		06700D7A232808840009B739 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		06700D7D232808840009B739 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		06700D7F232808860009B739 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06700D82232808860009B739 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,6 +43,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0631285F232F8B2E00272604 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				06700D7C232808840009B739 /* Main.storyboard */,
+				06700D7F232808860009B739 /* Assets.xcassets */,
+				06700D81232808860009B739 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		06312860232F8C8200272604 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				06700D78232808840009B739 /* AppDelegate.swift */,
+				06312861232F8CBF00272604 /* Controllers */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		06312861232F8CBF00272604 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				06700D7A232808840009B739 /* LoginViewController.swift */,
+				0631286C232FE24900272604 /* FriendsViewController.swift */,
+				0631286E232FE28100272604 /* GroupsViewController.swift */,
+				06312870232FE2A900272604 /* GroupAddViewController.swift */,
+				06312872232FE2D300272604 /* FriendFtotoViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		06700D6C232808840009B739 = {
 			isa = PBXGroup;
 			children = (
@@ -54,11 +93,8 @@
 		06700D77232808840009B739 /* vk_gvozd_client */ = {
 			isa = PBXGroup;
 			children = (
-				06700D78232808840009B739 /* AppDelegate.swift */,
-				06700D7A232808840009B739 /* ViewController.swift */,
-				06700D7C232808840009B739 /* Main.storyboard */,
-				06700D7F232808860009B739 /* Assets.xcassets */,
-				06700D81232808860009B739 /* LaunchScreen.storyboard */,
+				0631285F232F8B2E00272604 /* Resource */,
+				06312860232F8C8200272604 /* Source */,
 				06700D84232808860009B739 /* Info.plist */,
 			);
 			path = vk_gvozd_client;
@@ -135,7 +171,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06700D7B232808840009B739 /* ViewController.swift in Sources */,
+				0631286F232FE28100272604 /* GroupsViewController.swift in Sources */,
+				06312873232FE2D300272604 /* FriendFtotoViewController.swift in Sources */,
+				06700D7B232808840009B739 /* LoginViewController.swift in Sources */,
+				0631286D232FE24900272604 /* FriendsViewController.swift in Sources */,
+				06312871232FE2A900272604 /* GroupAddViewController.swift in Sources */,
 				06700D79232808840009B739 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
