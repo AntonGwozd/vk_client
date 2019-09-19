@@ -96,26 +96,27 @@ class LoginViewController: UIViewController {
         
         // если текста нет совсем возвращает string "" а не nil
         // делаем бордюры красным подсвечивая не заполненные поля и убираем подсветку если поля заполнены.
-        if login == "" {
-            loginTextField.layer.borderColor = UIColor.red.cgColor
-            loginTextField.layer.borderWidth = 1.0
-            loginTextField.placeholder = "wrong login!"
-        } else {
-            loginTextField.layer.borderColor = UIColor.black.cgColor
-            loginTextField.layer.borderWidth = 0.0
-        }
-        
-        if password == "" {
-            passwordTextField.layer.borderColor = UIColor.red.cgColor
-            passwordTextField.layer.borderWidth = 1.0
-            passwordTextField.placeholder = "wrong pasword!"
-        } else {
-            passwordTextField.layer.borderColor = UIColor.black.cgColor
-            passwordTextField.layer.borderWidth = 0.0
-        }
+//        if login == "" {
+//            loginTextField.layer.borderColor = UIColor.red.cgColor
+//            loginTextField.layer.borderWidth = 1.0
+//            loginTextField.placeholder = "wrong login!"
+//        } else {
+//            loginTextField.layer.borderColor = UIColor.black.cgColor
+//            loginTextField.layer.borderWidth = 0.0
+//        }
+//
+//        if password == "" {
+//            passwordTextField.layer.borderColor = UIColor.red.cgColor
+//            passwordTextField.layer.borderWidth = 1.0
+//            passwordTextField.placeholder = "wrong pasword!"
+//        } else {
+//            passwordTextField.layer.borderColor = UIColor.black.cgColor
+//            passwordTextField.layer.borderWidth = 0.0
+//        }
         //Конец области подсветки
         
-        return login == "AntonGwozd" && password == "123456"
+//        return login == "AntonGwozd" && password == "123456"
+        return login == "" && password == ""
     }
     
     func showEnterError() {
