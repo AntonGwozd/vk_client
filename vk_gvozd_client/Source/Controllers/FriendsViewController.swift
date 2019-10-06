@@ -10,6 +10,8 @@ import UIKit
 
 class FriendsViewController: UITableViewController {
     
+    @IBOutlet weak var nameControll: NameControll!
+    
     var allFriends = [VKUser(userName: "Berta", userAvatar: UIImage(named: "Berta")!),
                       VKUser(userName: "Bobby", userAvatar: UIImage(named: "Bobby")!),
                       VKUser(userName: "Jodie", userAvatar: UIImage(named: "Jodie")!),
@@ -27,6 +29,9 @@ class FriendsViewController: UITableViewController {
         allFriends[5].addFoto(UIImage(named: "group4")!)
         allFriends[5].addFoto(UIImage(named: "group5")!)
         allFriends[5].addFoto(UIImage(named: "group6")!)
+        
+        //отдадим массив для заполнения массива алфавитки
+        nameControll.createArray(inArray: allFriends)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,10 +41,9 @@ class FriendsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendCell
         
-        
         cell.friendNameLabel.text = allFriends[indexPath.row].userName
         cell.friendFotoQuantLabel.text = "Фотографий: \(allFriends[indexPath.row].userFoto.count)"
-        cell.friendAvatarImage.image = allFriends[indexPath.row].userAvatar
+        cell.friendAvatar.image = allFriends[indexPath.row].userAvatar
         
         return cell
     }
@@ -60,8 +64,10 @@ class FriendsViewController: UITableViewController {
             guard let fotoController = segue.destination as? FriendFotoViewController else {return}
             guard let indexPath = tableView.indexPathForSelectedRow else {return}
             fotoController.userFoto.removeAll()
+            var numberFoto: Int = 1
             for image in allFriends[indexPath.row].userFoto {
-                fotoController.userFoto.append((userImage: image, userName: allFriends[indexPath.row].userName, numberFoto: "1"))
+                fotoController.userFoto.append((userImage: image.userFoto, userName: allFriends[indexPath.row].userName, numberFoto: String(numberFoto), likeCount: image.likeCount))
+                numberFoto += 1
             }
         }
     }

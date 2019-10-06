@@ -11,12 +11,12 @@ import UIKit
 class FriendCell: UITableViewCell {
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var friendFotoQuantLabel: UILabel!
-    @IBOutlet weak var friendAvatarImage: UIImageView!
+    @IBOutlet weak var friendAvatar: AvatarView!
     
     override func prepareForReuse() {
         super.prepareForReuse()
         friendNameLabel.text = nil
-        friendAvatarImage.image = nil
+//        friendAvatar.image = nil
         friendFotoQuantLabel.text = nil
     }
 }

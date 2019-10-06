@@ -12,7 +12,7 @@ import UIKit
 
 class FriendFotoViewController: UICollectionViewController {
     
-    var userFoto = [(userImage: UIImage, userName: String, numberFoto: String)]()
+    var userFoto = [(userImage: UIImage, userName: String, numberFoto: String, likeCount: Int)]()
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userFoto.count
@@ -24,8 +24,15 @@ class FriendFotoViewController: UICollectionViewController {
         cell.friendNameLabel.text = userFoto[indexPath.row].userName
         cell.friendNumberFotoLabel.text = userFoto[indexPath.row].numberFoto
         cell.friendFotoImage.image = userFoto[indexPath.row].userImage
-    
+        if userFoto[indexPath.row].likeCount == 0 {
+            cell.friendLikeValue.likeValue = false
+        } else {
+            cell.friendLikeValue.likeValue = true
+        }
+        cell.friendLikeValue.likeCount.text = String(userFoto[indexPath.row].likeCount)
+        
         return cell
     }
 
 }
+

@@ -13,6 +13,8 @@ class FriendFotoCell: UICollectionViewCell {
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var friendNumberFotoLabel: UILabel!
     @IBOutlet weak var friendFotoImage: UIImageView!
+    @IBOutlet weak var friendLikeValue: HeartControll!
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -20,6 +22,7 @@ class FriendFotoCell: UICollectionViewCell {
         friendNameLabel.text = nil
         friendNumberFotoLabel.text = nil
         friendFotoImage.image = nil
+        friendLikeValue.likeValue = false
         
     }
     
