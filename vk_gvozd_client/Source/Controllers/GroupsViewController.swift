@@ -11,23 +11,26 @@ import UIKit
 class GroupsViewController: UITableViewController {
 
     var vkGroup = [VKGroup]()
+    static var groupCellID = "groupCell"
     
-    @IBAction func unwindListGroups(unwindSegue: UIStoryboardSegue) {
-        if unwindSegue.identifier == "addGroupSegue" {
-            guard let allGroupController = unwindSegue.source as? GroupAddViewController else {return}
-            guard let indexPath = allGroupController.tableView.indexPathForSelectedRow else {return}
-            
-            let newGroup = allGroupController.allGroup[indexPath.row]
-            if !vkGroup.contains(where: { $0.groupName == newGroup.groupName}) {
-                vkGroup.append(newGroup)
-                tableView.insertRows(at: [IndexPath(row: vkGroup.count - 1, section: 0)], with: .fade)
-            }
-        }
-    }
+//    @IBAction func unwindListGroups(unwindSegue: UIStoryboardSegue) {
+//        if unwindSegue.identifier == "addGroupSegue" {
+//            guard let allGroupController = unwindSegue.source as? GroupAddViewController else {return}
+//            guard let indexPath = allGroupController.tableView.indexPathForSelectedRow else {return}
+//            
+//            let newGroup = allGroupController.allGroup[indexPath.row]
+//            if !vkGroup.contains(where: { $0.groupName == newGroup.groupName}) {
+//                vkGroup.append(newGroup)
+//                tableView.insertRows(at: [IndexPath(row: vkGroup.count - 1, section: 0)], with: .fade)
+//            }
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //регистрируем ксиб
+        tableView.register(UINib(nibName: "GroupCell", bundle: nil), forCellReuseIdentifier: GroupsViewController.groupCellID)
     }
 
     // MARK: - Table view data source
@@ -38,7 +41,7 @@ class GroupsViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: GroupsViewController.groupCellID, for: indexPath) as! GroupCell
         cell.groupNameLabel.text = vkGroup[indexPath.row].groupName
         cell.groupImageView.image = vkGroup[indexPath.row].groupAvatar
         return cell

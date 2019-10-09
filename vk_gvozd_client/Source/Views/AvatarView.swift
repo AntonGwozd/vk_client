@@ -47,7 +47,7 @@ class AvatarView: UIView {
         imageView.layer.masksToBounds = true
         if showBorder {
             imageView.layer.borderWidth = 1
-            imageView.layer.borderColor = UIColor.black.cgColor
+            imageView.layer.borderColor = UIColor.darkGray.cgColor
         }
         addSubview(imageView)
         

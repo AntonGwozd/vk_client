@@ -34,6 +34,7 @@ class NameControll: UIControl {
     }
     
     private func setupView() {
+        buttons.removeAll()
         for letter in letters {
             let button = UIButton(type: .system)
             button.setTitle(String(letter), for: .normal)
@@ -46,7 +47,7 @@ class NameControll: UIControl {
         stakView = UIStackView(arrangedSubviews: self.buttons)
         self.addSubview(stakView)
         stakView.spacing = 8
-        stakView.axis = .horizontal
+        stakView.axis = .vertical
         stakView.alignment = .center
         stakView.distribution = .fillEqually
     }
