@@ -61,12 +61,43 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTA-62-CC8">
+                                        <rect key="frame" x="152.5" y="381" width="10" height="10"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="6RB-vk-2T2"/>
+                                            <constraint firstAttribute="width" constant="10" id="Ysd-zf-K1D"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uXv-Cc-nVb">
+                                        <rect key="frame" x="182.5" y="381" width="10" height="10"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="4EE-C4-Ayo"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="6PZ-V5-WBT"/>
+                                            <constraint firstAttribute="width" constant="10" id="K7C-BK-ke5"/>
+                                            <constraint firstAttribute="height" constant="10" id="xtO-6K-TTh"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m1q-Fq-U1K">
+                                        <rect key="frame" x="212.5" y="381" width="10" height="10"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="TZo-1F-gNT"/>
+                                            <constraint firstAttribute="height" constant="10" id="VWP-bF-Jw4"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="eYs-dj-Jgn"/>
+                                            <constraint firstAttribute="width" constant="10" id="hJC-9o-Z1v"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="m1q-Fq-U1K" firstAttribute="centerY" secondItem="uXv-Cc-nVb" secondAttribute="centerY" id="6tu-rP-uZo"/>
+                                    <constraint firstItem="uXv-Cc-nVb" firstAttribute="centerY" secondItem="ZTA-62-CC8" secondAttribute="centerY" id="7D6-cr-03r"/>
                                     <constraint firstItem="KlZ-LX-PTh" firstAttribute="centerX" secondItem="bZb-6r-daQ" secondAttribute="centerX" id="7O3-Wa-Cx2"/>
                                     <constraint firstItem="ql1-7S-gi3" firstAttribute="top" secondItem="TUX-yQ-0Yb" secondAttribute="bottom" constant="40" id="AGa-Cy-rUJ"/>
                                     <constraint firstItem="TUX-yQ-0Yb" firstAttribute="top" secondItem="Kf3-Vv-tdS" secondAttribute="bottom" constant="10" id="D03-d0-bwb"/>
+                                    <constraint firstItem="uXv-Cc-nVb" firstAttribute="leading" secondItem="ZTA-62-CC8" secondAttribute="trailing" constant="20" id="Fg1-RL-EIh"/>
                                     <constraint firstItem="ql1-7S-gi3" firstAttribute="centerX" secondItem="bZb-6r-daQ" secondAttribute="centerX" id="Js1-hL-xD0"/>
                                     <constraint firstItem="Kf3-Vv-tdS" firstAttribute="centerX" secondItem="bZb-6r-daQ" secondAttribute="centerX" id="Lor-yu-RQh"/>
                                     <constraint firstItem="TUX-yQ-0Yb" firstAttribute="centerX" secondItem="bZb-6r-daQ" secondAttribute="centerX" id="MeP-hJ-g4S"/>
@@ -74,6 +105,9 @@
                                     <constraint firstAttribute="bottom" secondItem="KlZ-LX-PTh" secondAttribute="bottom" constant="20" id="UcY-82-Fkt"/>
                                     <constraint firstItem="CZ1-ns-6gD" firstAttribute="top" secondItem="bZb-6r-daQ" secondAttribute="top" constant="40" id="YQa-v0-sNS"/>
                                     <constraint firstItem="CZ1-ns-6gD" firstAttribute="centerX" secondItem="bZb-6r-daQ" secondAttribute="centerX" id="fU5-FD-1Bt"/>
+                                    <constraint firstItem="uXv-Cc-nVb" firstAttribute="top" secondItem="KlZ-LX-PTh" secondAttribute="bottom" constant="40" id="g38-0e-oVj"/>
+                                    <constraint firstItem="uXv-Cc-nVb" firstAttribute="centerX" secondItem="KlZ-LX-PTh" secondAttribute="centerX" id="h3z-ro-ALp"/>
+                                    <constraint firstItem="m1q-Fq-U1K" firstAttribute="leading" secondItem="uXv-Cc-nVb" secondAttribute="trailing" constant="20" id="jgm-Vm-qd4"/>
                                     <constraint firstItem="Kf3-Vv-tdS" firstAttribute="top" secondItem="CZ1-ns-6gD" secondAttribute="bottom" constant="40" id="smK-2k-jUl"/>
                                     <constraint firstItem="HaG-9q-F6L" firstAttribute="centerX" secondItem="bZb-6r-daQ" secondAttribute="centerX" id="y5G-2f-Ikt"/>
                                     <constraint firstItem="KlZ-LX-PTh" firstAttribute="top" secondItem="HaG-9q-F6L" secondAttribute="bottom" constant="40" id="z1X-y3-qJz"/>
@@ -92,7 +126,15 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="VAj-rr-Q7d"/>
                     <navigationItem key="navigationItem" id="rZK-Fm-2Ue"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="loadFaza">
+                            <real key="value" value="0.29999999999999999"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="loadFramePoint1" destination="ZTA-62-CC8" id="FFE-Zt-z93"/>
+                        <outlet property="loadFramePoint2" destination="uXv-Cc-nVb" id="tlO-4z-GaE"/>
+                        <outlet property="loadFramePoint3" destination="m1q-Fq-U1K" id="q9H-ar-uGH"/>
                         <outlet property="loginButton" destination="KlZ-LX-PTh" id="v6a-mn-Sc7"/>
                         <outlet property="loginLabel" destination="Kf3-Vv-tdS" id="Eq9-ya-dl7"/>
                         <outlet property="loginTextField" destination="TUX-yQ-0Yb" id="5ZW-pW-UIX"/>
@@ -105,6 +147,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="910" y="518"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="glx-bj-zhi">
+            <objects>
+                <viewController id="HAT-wG-gB4" customClass="TestViewController" customModule="vk_gvozd_client" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sc7-bz-ze4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="kgY-Tg-SML"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qxN-Pc-ysr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="910" y="1529"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Wna-wx-iNm">
@@ -289,7 +346,7 @@
                                                 <constraint firstAttribute="width" constant="30" id="dc2-Pf-Hj1"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

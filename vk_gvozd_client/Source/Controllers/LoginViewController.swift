@@ -17,6 +17,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loadFramePoint1: UIView!
+    @IBOutlet weak var loadFramePoint2: UIView!
+    @IBOutlet weak var loadFramePoint3: UIView!
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         
@@ -33,10 +36,46 @@ class LoginViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         loginButton.setTitle("Log In", for: .normal)
         
+        //Загрузчик
+        loadFramePoint1.layer.cornerRadius = loadFramePoint1.bounds.width / 2
+        loadFramePoint2.layer.cornerRadius = loadFramePoint2.bounds.width / 2
+        loadFramePoint3.layer.cornerRadius = loadFramePoint3.bounds.width / 2
+        loadFramePoint1.layer.backgroundColor = UIColor.black.cgColor
+        loadFramePoint2.layer.backgroundColor = UIColor.black.cgColor
+        loadFramePoint3.layer.backgroundColor = UIColor.black.cgColor
+        loadFramePoint1.alpha = 0
+        loadFramePoint2.alpha = 0
+        loadFramePoint3.alpha = 0
+        //Анимация
+        UIView.animateKeyframes(withDuration: 2, delay: 0, options: [.repeat], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25) {
+                self.loadFramePoint1.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
+                self.loadFramePoint1.alpha = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.33) {
+                self.loadFramePoint2.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25) {
+                self.loadFramePoint2.alpha = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.33) {
+                self.loadFramePoint3.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
+                self.loadFramePoint3.alpha = 0
+            }
+        })
+        
         //Распознователь жестов
         let hideKeyboardGestute = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         //добавляем распознователь в скрол вью
         scrollView.addGestureRecognizer(hideKeyboardGestute)
+        
+        
         
         
     }	

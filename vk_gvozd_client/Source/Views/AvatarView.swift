@@ -23,11 +23,20 @@ class AvatarView: UIView {
     private let shadowView = UIView()
     private let imageView = UIImageView()
     
+    lazy var tapRecognizer: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self,
+                                                action: #selector(onTap))
+        return recognizer
+    }()
+   
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addGestureRecognizer(tapRecognizer)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setupView()
-        
     }
     
     func setupView() {
@@ -61,6 +70,13 @@ class AvatarView: UIView {
         shadowView.layer.cornerRadius = shadowView.bounds.width / 2
         imageView.layer.cornerRadius = imageView.bounds.width / 2
         
+    }
+     
+    @objc func onTap() {
+        UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 50, options: .curveEaseInOut, animations: {
+            self.imageView.bounds.size = CGSize(width: self.imageView.bounds.width * 1.2, height: self.imageView.bounds.height * 1.2)
+            self.shadowView.bounds.size = CGSize(width: self.shadowView.bounds.width * 1.2, height: self.shadowView.bounds.height * 1.2)
+        })
     }
 }
 

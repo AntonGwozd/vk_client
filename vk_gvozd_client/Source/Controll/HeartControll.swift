@@ -26,12 +26,15 @@ class HeartControll: UIControl {
         likeValue = !likeValue
         setNeedsDisplay()
         guard let oldLikeCount = Int(likeCount.text!) else {return}
+        var newLikeValue: Int = 0
         if likeValue {
-            likeCount.text = String(oldLikeCount+1)
+            newLikeValue = oldLikeCount + 1
         } else {
-            likeCount.text = String(oldLikeCount-1)
+            newLikeValue = oldLikeCount - 1
         }
-        
+        UIView.transition(with: likeCount, duration: 0.5, options: .transitionFlipFromTop, animations: {
+            self.likeCount.text = String(newLikeValue)
+        })
     }
     
     required init?(coder: NSCoder) {
