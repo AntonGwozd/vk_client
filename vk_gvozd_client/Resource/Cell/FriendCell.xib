@@ -97,6 +97,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarConstrain" destination="eYz-O0-yrE" id="QyW-fN-xF8"/>
                 <outlet property="friendAvatar" destination="Es6-c7-D5m" id="VrP-KY-REo"/>
                 <outlet property="friendFotoQuantLabel" destination="kDl-a9-0kU" id="onZ-VX-k6i"/>
                 <outlet property="friendNameLabel" destination="kjm-E6-7Wa" id="tmZ-5v-a9C"/>

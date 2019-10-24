@@ -29,6 +29,7 @@
 		0680F3512338C3F900CAE1E3 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680F3502338C3F900CAE1E3 /* GradientView.swift */; };
 		0680F3532338E9A800CAE1E3 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680F3522338E9A800CAE1E3 /* AvatarView.swift */; };
 		06AC6F8E23314431003B27F3 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AC6F8D23314431003B27F3 /* GroupCell.swift */; };
+		06C21B682361757300A25D1E /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C21B672361757300A25D1E /* CustomSearchView.swift */; };
 		06C3C715234CF3A100918F8F /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C3C714234CF3A100918F8F /* CustomCollectionViewLayout.swift */; };
 		06EADFFA234E493A00AB62FC /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EADFF9234E493A00AB62FC /* NewsViewController.swift */; };
 		06EADFFC234E595300AB62FC /* NewsFotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06EADFFB234E595300AB62FC /* NewsFotoCell.xib */; };
@@ -64,6 +65,7 @@
 		0680F3502338C3F900CAE1E3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		0680F3522338E9A800CAE1E3 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		06AC6F8D23314431003B27F3 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
+		06C21B672361757300A25D1E /* CustomSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchView.swift; sourceTree = "<group>"; };
 		06C3C714234CF3A100918F8F /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
 		06EADFF9234E493A00AB62FC /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		06EADFFB234E595300AB62FC /* NewsFotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFotoCell.xib; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				0680F3522338E9A800CAE1E3 /* AvatarView.swift */,
 				0680F3502338C3F900CAE1E3 /* GradientView.swift */,
 				06C3C714234CF3A100918F8F /* CustomCollectionViewLayout.swift */,
+				06C21B672361757300A25D1E /* CustomSearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				06312871232FE2A900272604 /* GroupAddViewController.swift in Sources */,
 				06700D79232808840009B739 /* AppDelegate.swift in Sources */,
 				0668A6D523328C5D001E4DBD /* VKGroup.swift in Sources */,
+				06C21B682361757300A25D1E /* CustomSearchView.swift in Sources */,
 				0680F3532338E9A800CAE1E3 /* AvatarView.swift in Sources */,
 				06EAE002234E5D6E00AB62FC /* NewsTextCell.swift in Sources */,
 				0668A6D32332874B001E4DBD /* VKUser.swift in Sources */,

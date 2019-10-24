@@ -17,8 +17,12 @@ class FriendsViewController: UITableViewController {
 
     static var friendCellID = "friendsCell"
     
-    @IBOutlet weak var searchBarView: UISearchBar!
-
+    @IBOutlet weak var searchTextFiled: UITextField!
+    
+    @IBAction func cancelButtonAction(sender: UIButton) {
+        searchTextFiled.text = ""
+        searchTextFunc(searchTextFiled)
+    }
     
     var allFriends: [VKUser] = []
     var allFriendsMaster: [VKUser] = []
@@ -30,9 +34,26 @@ class FriendsViewController: UITableViewController {
         //Заполним массив именами
         createArray()
                 
-        //регистрируем ксиб
+        //регистрируем ксиб ячейки
         tableView.register(UINib(nibName: "FriendCell", bundle: nil), forCellReuseIdentifier: FriendsViewController.friendCellID)
+        
+        //
+        searchTextFiled.addTarget(self, action: #selector(searchTextFunc(_ :)), for: .editingChanged)
     }
+    
+    @objc func searchTextFunc(_ textfield:UITextField) {
+        let searchText = searchTextFiled.text ?? ""
+        if searchText == "" {
+            allFriends = allFriendsMaster
+        } else {
+            allFriends = allFriendsMaster.filter { $0.userName.range(of: searchText) != nil}
+        }
+        createSectionArray()
+        createDict()
+        tableView.reloadData()
+    }
+    
+    
     
     //Имена секций
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -71,7 +92,12 @@ class FriendsViewController: UITableViewController {
         
         return headerView
     }
-
+    
+    // ячейка будет показана
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let aniCell = cell as! FriendCell
+        aniCell.animationWillDisplay()
+    }
     
     //Количество строк в секции по размеру массива
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,7 +142,7 @@ class FriendsViewController: UITableViewController {
             }	
         }
     }
-    
+        
     //Протащим первую букву имени через множество и вернем ее массивом букв для имен секций
     func createSectionArray(){
         sectionName = []
@@ -295,19 +321,6 @@ class FriendsViewController: UITableViewController {
         allFriends = allFriendsMaster
         createSectionArray()
         createDict()
-    }
-}
-
-extension FriendsViewController: UISearchBarDelegate {
-    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText == "" {
-            allFriends = allFriendsMaster
-        } else {
-            allFriends = allFriendsMaster.filter { $0.userName.range(of: searchText) != nil}
-        }
-        createSectionArray()
-        createDict()
-        tableView.reloadData()
     }
 }
 

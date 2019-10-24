@@ -8,10 +8,19 @@
 	
 import UIKit
 
-class TestViewController: UIViewController {
+class TestViewController: UIViewController{
     
     @IBOutlet weak var aniView: UIView!
     @IBOutlet var constraint: NSLayoutConstraint!
+    @IBOutlet weak var textFiled: UITextField!
+    
+//    @IBAction func textTouch(_ sender: UITextField) {
+//        textFiled.text = "ХЕРАСЕ"
+//    }
+    @IBAction func textFieldEditingDidBegin(_ sender: UITextField) {
+        textFiled.text = "ХЕРАСЕ"
+    }
+    
     
     
     @IBAction func animation1(sender: UIButton) {
@@ -76,7 +85,7 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func animation9(sender: UIButton) {
-        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 0.01, initialSpringVelocity: 10, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 30, options: .curveEaseInOut, animations: {
             self.aniView.frame.origin.y -= 75
         })
     }

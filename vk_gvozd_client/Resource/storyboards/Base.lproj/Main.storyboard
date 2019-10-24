@@ -191,14 +191,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="reI-vA-DSd">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="w5V-jM-kmu" customClass="CustomSearchView" customModule="vk_gvozd_client" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UrA-TW-mmI">
+                                    <rect key="frame" x="0.0" y="1" width="19.5" height="42.5"/>
+                                    <color key="backgroundColor" red="0.0" green="0.93964192160000004" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdf-aD-I1M" userLabel="CancelButton">
+                                    <rect key="frame" x="367" y="7" width="0.0" height="30"/>
+                                    <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" id="RZs-F0-gDX"/>
+                                    </constraints>
+                                    <state key="normal" title="Отмена">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="cancelButtonActionWithSender:" destination="2nN-Tb-LMn" eventType="touchUpInside" id="go2-Lg-t6Y"/>
+                                        <action selector="cancelButtonActionWithSender:" destination="w5V-jM-kmu" eventType="touchUpInside" id="vp7-6g-VIz"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ybp-Jy-slQ">
+                                    <rect key="frame" x="135" y="5" width="97" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="pV5-ng-Bxv" id="yye-zB-z88"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="Ybp-Jy-slQ" firstAttribute="leading" secondItem="UrA-TW-mmI" secondAttribute="trailing" constant="8" id="27g-vN-n8j"/>
+                                <constraint firstItem="tdf-aD-I1M" firstAttribute="centerY" secondItem="w5V-jM-kmu" secondAttribute="centerY" id="JaW-Jq-8gU"/>
+                                <constraint firstAttribute="trailing" secondItem="UrA-TW-mmI" secondAttribute="trailing" constant="8" id="OeI-N8-tUX"/>
+                                <constraint firstAttribute="bottom" secondItem="UrA-TW-mmI" secondAttribute="bottom" id="P8S-IF-1az"/>
+                                <constraint firstItem="Ybp-Jy-slQ" firstAttribute="centerY" secondItem="w5V-jM-kmu" secondAttribute="centerY" id="Px2-ou-IEM"/>
+                                <constraint firstItem="UrA-TW-mmI" firstAttribute="top" secondItem="w5V-jM-kmu" secondAttribute="top" id="QQ7-C9-L3Y"/>
+                                <constraint firstItem="tdf-aD-I1M" firstAttribute="leading" secondItem="Ybp-Jy-slQ" secondAttribute="trailing" constant="8" id="TVj-Qd-X2m"/>
+                                <constraint firstItem="UrA-TW-mmI" firstAttribute="leading" secondItem="w5V-jM-kmu" secondAttribute="leading" id="h2M-tf-78K"/>
+                                <constraint firstAttribute="trailing" secondItem="tdf-aD-I1M" secondAttribute="trailing" constant="8" id="o96-Jt-pQ9"/>
+                            </constraints>
                             <connections>
-                                <outlet property="delegate" destination="2nN-Tb-LMn" id="JAd-st-boC"/>
+                                <outlet property="cancelButtonWight" destination="RZs-F0-gDX" id="6n1-47-2F8"/>
+                                <outlet property="searchImageRightConstrain" destination="OeI-N8-tUX" id="hJZ-ND-7Fk"/>
+                                <outlet property="searchTextField" destination="Ybp-Jy-slQ" id="fDL-E2-rfe"/>
                             </connections>
-                        </searchBar>
+                        </view>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="2nN-Tb-LMn" id="ora-io-xhC"/>
@@ -207,7 +249,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Друзья" id="PLN-Lg-aAe"/>
                     <connections>
-                        <outlet property="searchBarView" destination="reI-vA-DSd" id="Je6-8E-0ym"/>
+                        <outlet property="searchTextFiled" destination="Ybp-Jy-slQ" id="ci5-L7-Dp2"/>
                         <segue destination="aIj-AY-FuF" kind="show" identifier="openFotoScreenSegue" id="4Gg-2J-jsb"/>
                     </connections>
                 </tableViewController>
@@ -346,7 +388,7 @@
                                                 <constraint firstAttribute="width" constant="30" id="dc2-Pf-Hj1"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -402,6 +444,7 @@
     </scenes>
     <resources>
         <image name="female-36" width="36" height="36"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="60"/>
         <image name="news-36" width="36" height="36"/>
         <image name="opened-folder-36" width="36" height="36"/>
     </resources>
