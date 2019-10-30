@@ -32,7 +32,10 @@ class FriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Заполним массив именами
-        createArray()
+        //createArray()
+        var vkAPI = VkAPI()
+        vkAPI.getFriensList()
+        vkAPI.getUserPhotos()
                 
         //регистрируем ксиб ячейки
         tableView.register(UINib(nibName: "FriendCell", bundle: nil), forCellReuseIdentifier: FriendsViewController.friendCellID)

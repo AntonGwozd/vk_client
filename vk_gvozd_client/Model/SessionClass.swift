@@ -14,5 +14,7 @@ class Session {
     
     var token = String()
     var userId = Int()
+    let vkAPIVersion = String("5.68")
+    let vkClientID = String("7188698")
 }
 
