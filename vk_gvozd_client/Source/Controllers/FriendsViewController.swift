@@ -28,15 +28,18 @@ class FriendsViewController: UITableViewController {
     var allFriendsMaster: [VKUser] = []
     var sectionName: [String] = []
     var allFriendsStruct: [UserStruct] = []
+    let vkAPI = VkAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Заполним массив именами
         //createArray()
-        var vkAPI = VkAPI()
-        vkAPI.getFriensList()
-        vkAPI.getUserPhotos()
-                
+        vkAPI.getFriensList(viewController: self)
+        allFriendsMaster.sort{ $0.userName < $1.userName }
+        allFriends = allFriendsMaster
+        createSectionArray()
+        createDict()
+
         //регистрируем ксиб ячейки
         tableView.register(UINib(nibName: "FriendCell", bundle: nil), forCellReuseIdentifier: FriendsViewController.friendCellID)
         

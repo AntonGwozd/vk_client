@@ -46,6 +46,7 @@ extension VKLoginController: WKNavigationDelegate {
             })
         let token = params!["access_token"]
         Session.shared.token = token!
+        print("access toke: \(token!)")
         decisionHandler(.cancel)
         performSegue(withIdentifier: "fromLoginController", sender: nil)
     }
