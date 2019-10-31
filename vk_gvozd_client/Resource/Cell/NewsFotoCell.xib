@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="newsFotoCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="414" id="r50-0Y-PcV" customClass="NewsFotoCell" customModule="vk_gvozd_client" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r50-0Y-PcV" id="qFt-SP-VNc">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rPV-P2-HtE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="rPV-P2-HtE" secondAttribute="height" multiplier="1:1" id="67k-ya-vFw"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rPV-P2-HtE" firstAttribute="top" secondItem="qFt-SP-VNc" secondAttribute="top" id="DAx-qn-JkE"/>
+                    <constraint firstItem="rPV-P2-HtE" firstAttribute="leading" secondItem="qFt-SP-VNc" secondAttribute="leading" id="ODR-Ej-faY"/>
+                    <constraint firstItem="rPV-P2-HtE" firstAttribute="centerX" secondItem="qFt-SP-VNc" secondAttribute="centerX" id="T9D-gz-47f"/>
+                    <constraint firstAttribute="bottom" secondItem="rPV-P2-HtE" secondAttribute="bottom" id="ms1-Pw-HhC"/>
+                    <constraint firstAttribute="trailing" secondItem="rPV-P2-HtE" secondAttribute="trailing" id="n5P-28-enC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="newsFoto" destination="rPV-P2-HtE" id="hsL-Wm-EuD"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="196.20535714285714"/>
+        </tableViewCell>
+    </objects>
+</document>

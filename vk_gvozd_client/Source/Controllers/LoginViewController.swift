@@ -1,0 +1,170 @@
+//
+//  LoginViewController.swift
+//  vk_gvozd_client
+//
+//  Created by Anton Gvozdanov on 10/09/2019.
+//  Copyright © 2019 Anton Gvozdanov. All rights reserved.
+//
+
+import UIKit
+
+class LoginViewController: UIViewController {
+
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loadFramePoint1: UIView!
+    @IBOutlet weak var loadFramePoint2: UIView!
+    @IBOutlet weak var loadFramePoint3: UIView!
+    
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        titleLabel.text = "Enter your account"
+        loginLabel.text = "Login:"
+        passwordLabel.text = "Password:"
+        loginTextField.placeholder = "login"
+        passwordTextField.placeholder = "password"
+        passwordTextField.isSecureTextEntry = true
+        loginButton.setTitle("Log In", for: .normal)
+        
+        //Загрузчик
+        loadFramePoint1.layer.cornerRadius = loadFramePoint1.bounds.width / 2
+        loadFramePoint2.layer.cornerRadius = loadFramePoint2.bounds.width / 2
+        loadFramePoint3.layer.cornerRadius = loadFramePoint3.bounds.width / 2
+        loadFramePoint1.layer.backgroundColor = UIColor.black.cgColor
+        loadFramePoint2.layer.backgroundColor = UIColor.black.cgColor
+        loadFramePoint3.layer.backgroundColor = UIColor.black.cgColor
+        loadFramePoint1.alpha = 0
+        loadFramePoint2.alpha = 0
+        loadFramePoint3.alpha = 0
+        //Анимация
+        UIView.animateKeyframes(withDuration: 2, delay: 0, options: [.repeat], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25) {
+                self.loadFramePoint1.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
+                self.loadFramePoint1.alpha = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.33) {
+                self.loadFramePoint2.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25) {
+                self.loadFramePoint2.alpha = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.33) {
+                self.loadFramePoint3.alpha = 1
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
+                self.loadFramePoint3.alpha = 0
+            }
+        })
+        
+        //Распознователь жестов
+        let hideKeyboardGestute = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        //добавляем распознователь в скрол вью
+        scrollView.addGestureRecognizer(hideKeyboardGestute)
+        
+        
+        
+        
+    }	
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    //Метод изменения высоты скрол вью по размеру клавиатуры
+    @objc func keyboardWasShow (notification: Notification) {
+        let info = notification.userInfo! as NSDictionary
+        let keyboardSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
+        
+        let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+    }
+    
+    //Метод убирания отступов
+    @objc func keyboardWillHide (notification: Notification) {
+        let contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
+        scrollView.scrollIndicatorInsets = contentInset
+    }
+    
+    //Метод скрытия клавиатуры
+    @objc func hideKeyboard() {
+        self.scrollView?.endEditing(true)
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let userDataRight = checkLoginData()
+        if identifier == "fromLoginController" {
+            if !userDataRight {
+                showEnterError()
+            }
+            return true
+        }
+        return false
+    }
+    
+    func checkLoginData () -> Bool {
+        guard let login = loginTextField.text else {
+            titleLabel.text = "wrong login! try again."
+            return false}
+        guard let password = passwordTextField.text else {
+            titleLabel.text = "wrong password! try again."
+            return false}
+        
+        hideKeyboard()
+        
+        
+        // если текста нет совсем возвращает string "" а не nil
+        // делаем бордюры красным подсвечивая не заполненные поля и убираем подсветку если поля заполнены.
+//        if login == "" {
+//            loginTextField.layer.borderColor = UIColor.red.cgColor
+//            loginTextField.layer.borderWidth = 1.0
+//            loginTextField.placeholder = "wrong login!"
+//        } else {
+//            loginTextField.layer.borderColor = UIColor.black.cgColor
+//            loginTextField.layer.borderWidth = 0.0
+//        }
+//
+//        if password == "" {
+//            passwordTextField.layer.borderColor = UIColor.red.cgColor
+//            passwordTextField.layer.borderWidth = 1.0
+//            passwordTextField.placeholder = "wrong pasword!"
+//        } else {
+//            passwordTextField.layer.borderColor = UIColor.black.cgColor
+//            passwordTextField.layer.borderWidth = 0.0
+//        }
+        //Конец области подсветки
+        
+//        return login == "AntonGwozd" && password == "123456"
+        return login == "" && password == ""
+    }
+    
+    func showEnterError() {
+        let alert = UIAlertController(title: "Error!", message: "Введены неверные пользовательские данные", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
+    
+}
+
