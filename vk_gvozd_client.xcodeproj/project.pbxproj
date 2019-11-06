@@ -39,6 +39,8 @@
 		06EAE004234E675D00AB62FC /* NewsControllCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06EAE003234E675D00AB62FC /* NewsControllCell.xib */; };
 		06EAE006234E6A5E00AB62FC /* NewsControllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06EAE005234E6A5E00AB62FC /* NewsControllCell.swift */; };
 		2148195EB16CD8DF15AB2F30 /* Pods_vk_gvozd_client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E0A8B27314DB0A66ACC23D /* Pods_vk_gvozd_client.framework */; };
+		3638BB3B2371CD87008EFDB4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3638BB3A2371CD87008EFDB4 /* TabBarController.swift */; };
+		364B8261237338B600C11B99 /* VKUserFoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364B8260237338B600C11B99 /* VKUserFoto.swift */; };
 		36E1AE342368A65C002B9DC9 /* VKLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1AE332368A65C002B9DC9 /* VKLoginController.swift */; };
 		36E1AE3623694DCF002B9DC9 /* VkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E1AE3523694DCF002B9DC9 /* VkAPI.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		06EAE003234E675D00AB62FC /* NewsControllCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsControllCell.xib; sourceTree = "<group>"; };
 		06EAE005234E6A5E00AB62FC /* NewsControllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsControllCell.swift; sourceTree = "<group>"; };
 		14E0A8B27314DB0A66ACC23D /* Pods_vk_gvozd_client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk_gvozd_client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3638BB3A2371CD87008EFDB4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		364B8260237338B600C11B99 /* VKUserFoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKUserFoto.swift; sourceTree = "<group>"; };
 		36E1AE332368A65C002B9DC9 /* VKLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginController.swift; sourceTree = "<group>"; };
 		36E1AE3523694DCF002B9DC9 /* VkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkAPI.swift; sourceTree = "<group>"; };
 		9073D87154DDF023F55D983A /* Pods-vk_gvozd_client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk_gvozd_client.debug.xcconfig"; path = "Target Support Files/Pods-vk_gvozd_client/Pods-vk_gvozd_client.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 				06312872232FE2D300272604 /* FriendFotoViewController.swift */,
 				06EADFF9234E493A00AB62FC /* NewsViewController.swift */,
 				063F5FD82353071400ED8CA3 /* TestViewController.swift */,
+				3638BB3A2371CD87008EFDB4 /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			children = (
 				0668A6D22332874B001E4DBD /* VKUser.swift */,
 				0668A6D423328C5D001E4DBD /* VKGroup.swift */,
+				364B8260237338B600C11B99 /* VKUserFoto.swift */,
 				067F070A235F6BC700286006 /* SessionClass.swift */,
 				36E1AE3523694DCF002B9DC9 /* VkAPI.swift */,
 			);
@@ -365,10 +371,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				06AC6F8E23314431003B27F3 /* GroupCell.swift in Sources */,
+				3638BB3B2371CD87008EFDB4 /* TabBarController.swift in Sources */,
 				0631286F232FE28100272604 /* GroupsViewController.swift in Sources */,
 				06EADFFE234E5AD300AB62FC /* NewsFotoCell.swift in Sources */,
 				06312873232FE2D300272604 /* FriendFotoViewController.swift in Sources */,
 				06700D7B232808840009B739 /* LoginViewController.swift in Sources */,
+				364B8261237338B600C11B99 /* VKUserFoto.swift in Sources */,
 				067F070B235F6BC700286006 /* SessionClass.swift in Sources */,
 				0631286D232FE24900272604 /* FriendsViewController.swift in Sources */,
 				36E1AE3623694DCF002B9DC9 /* VkAPI.swift in Sources */,

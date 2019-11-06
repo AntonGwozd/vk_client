@@ -11,12 +11,7 @@ import UIKit
 class GroupAddViewController: UITableViewController {
     
     static var groupCellID = "groupCell"
-    var allGroup = [VKGroup(groupName: "CalculateGroup", groupAvatar: UIImage(named: "group1")!),
-                    VKGroup(groupName: "MoneyGroup", groupAvatar: UIImage(named: "group2")!),
-                    VKGroup(groupName: "DollarGroup", groupAvatar: UIImage(named: "group3")!),
-                    VKGroup(groupName: "PresentGroup", groupAvatar: UIImage(named: "group4")!),
-                    VKGroup(groupName: "CloseGroup", groupAvatar: UIImage(named: "group5")!),
-                    VKGroup(groupName: "OpenGroup", groupAvatar: UIImage(named: "group6")!)]
+    var allGroup: [VKGroup] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

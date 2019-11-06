@@ -8,12 +8,29 @@
 
 import UIKit
 
+struct GroupsJsData: Decodable {
+    let response: GroupsJsResponse
+}
+
+struct GroupsJsResponse: Decodable {
+    let count: Int
+    let items: [VKGroupNotImage]
+}
+
+struct VKGroupNotImage: Decodable{
+    let id: Int
+    let name: String
+    let photo_50: String
+}
+
 class VKGroup {
-    var groupName: String
-    var groupAvatar: UIImage
+    let id: Int
+    let groupName: String
+    let groupAvatar: UIImage
     
-    init (groupName: String, groupAvatar: UIImage) {
-        self.groupName = groupName
+    init (struckGroup: VKGroupNotImage, groupAvatar: UIImage) {
+        self.id = struckGroup.id
+        self.groupName = struckGroup.name
         self.groupAvatar = groupAvatar
     }
 }

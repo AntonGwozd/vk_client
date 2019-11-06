@@ -11,23 +11,17 @@ import UIKit
 class GroupsViewController: UITableViewController {
 
     var vkGroup = [VKGroup]()
+    let vkAPI = VkAPI()
     static var groupCellID = "groupCell"
-    
-//    @IBAction func unwindListGroups(unwindSegue: UIStoryboardSegue) {
-//        if unwindSegue.identifier == "addGroupSegue" {
-//            guard let allGroupController = unwindSegue.source as? GroupAddViewController else {return}
-//            guard let indexPath = allGroupController.tableView.indexPathForSelectedRow else {return}
-//            
-//            let newGroup = allGroupController.allGroup[indexPath.row]
-//            if !vkGroup.contains(where: { $0.groupName == newGroup.groupName}) {
-//                vkGroup.append(newGroup)
-//                tableView.insertRows(at: [IndexPath(row: vkGroup.count - 1, section: 0)], with: .fade)
-//            }
-//        }
-//    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        vkAPI.getUsersGroup( completion: {(gropsArray) -> () in
+            self.vkGroup = gropsArray
+            self.vkGroup.sort{ $0.groupName < $1.groupName }
+            self.tableView.reloadData()
+        })
         
         //регистрируем ксиб
         tableView.register(UINib(nibName: "GroupCell", bundle: nil), forCellReuseIdentifier: GroupsViewController.groupCellID)
