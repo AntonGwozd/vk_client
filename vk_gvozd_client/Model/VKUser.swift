@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct FriendsJsData: Decodable {
     let response: FriensJsResponse
@@ -21,25 +22,13 @@ struct VKUserNotImage: Decodable{
     let id: Int
     let first_name: String
     let last_name: String
-    //let nickname: String
     let photo_50: String
     let online: Int
-    //let track_code: String
 }
 
-class VKUser {
-    let id: Int
-    let first_name: String
-    let last_name: String
-    let online: Int
-    var userName: String {last_name + " " + first_name}
-    var userAvatar: UIImage
-    
-    init(structUser: VKUserNotImage, userAvatar: UIImage) {
-        self.id = structUser.id
-        self.first_name = structUser.first_name
-        self.last_name = structUser.last_name
-        self.online = structUser.online
-        self.userAvatar = userAvatar
-    }
+class VKUser: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var online = ""
+    @objc dynamic var userName = ""
+    @objc dynamic var userAvatar: Data? = nil
 }

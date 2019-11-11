@@ -7,20 +7,35 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsViewController: UITableViewController {
 
     var vkGroup = [VKGroup]()
     let vkAPI = VkAPI()
+    let realm = try! Realm()
     static var groupCellID = "groupCell"
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Грузим группы из базы
+        reloadDataArray()
         
-        vkAPI.getUsersGroup( completion: {(gropsArray) -> () in
-            self.vkGroup = gropsArray
-            self.vkGroup.sort{ $0.groupName < $1.groupName }
-            self.tableView.reloadData()
+        //просим группы с сервера
+        vkAPI.getUsersGroup( completion: {(response) -> () in
+            try! self.realm.write {
+                self.realm.delete(self.realm.objects(VKGroup.self))
+            }
+            for group in response.response.items {
+                let vkGroup = VKGroup()
+                vkGroup.id = group.id
+                vkGroup.groupName = group.name
+                vkGroup.groupAvatar = try? Data(contentsOf: URL(string: group.photo_50)!)
+                try! self.realm.write {
+                    self.realm.add(vkGroup)
+                }
+            }
+            self.reloadDataArray()
         })
         
         //регистрируем ксиб
@@ -37,7 +52,7 @@ class GroupsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: GroupsViewController.groupCellID, for: indexPath) as! GroupCell
         cell.groupNameLabel.text = vkGroup[indexPath.row].groupName
-        cell.groupImageView.image = vkGroup[indexPath.row].groupAvatar
+        cell.groupImageView.image = UIImage(data: vkGroup[indexPath.row].groupAvatar!)!
         return cell
     }
     
@@ -54,5 +69,11 @@ class GroupsViewController: UITableViewController {
         }
     }
 
+    //MARK: Обработка словарей
+    func reloadDataArray() {
+        vkGroup = Array(realm.objects(VKGroup.self))
+        vkGroup.sort{ $0.groupName < $1.groupName }
+        tableView.reloadData()
+    }
    
 }

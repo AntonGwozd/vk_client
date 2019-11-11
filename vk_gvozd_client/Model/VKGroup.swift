@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct GroupsJsData: Decodable {
     let response: GroupsJsResponse
@@ -23,14 +24,8 @@ struct VKGroupNotImage: Decodable{
     let photo_50: String
 }
 
-class VKGroup {
-    let id: Int
-    let groupName: String
-    let groupAvatar: UIImage
-    
-    init (struckGroup: VKGroupNotImage, groupAvatar: UIImage) {
-        self.id = struckGroup.id
-        self.groupName = struckGroup.name
-        self.groupAvatar = groupAvatar
-    }
+class VKGroup: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var groupName = ""
+    @objc dynamic var groupAvatar: Data? = nil
 }

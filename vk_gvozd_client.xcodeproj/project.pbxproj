@@ -12,7 +12,6 @@
 		06312871232FE2A900272604 /* GroupAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06312870232FE2A900272604 /* GroupAddViewController.swift */; };
 		06312873232FE2D300272604 /* FriendFotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06312872232FE2D300272604 /* FriendFotoViewController.swift */; };
 		063695A62342052C00AE020D /* HeartControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063695A52342052C00AE020D /* HeartControll.swift */; };
-		063F5FD92353071400ED8CA3 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063F5FD82353071400ED8CA3 /* TestViewController.swift */; };
 		0651CD5B234926DD00F788E4 /* NameControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0651CD5A234926DD00F788E4 /* NameControll.swift */; };
 		0651CD60234A557B00F788E4 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0651CD5F234A557B00F788E4 /* FriendCell.xib */; };
 		066211B1234BA0AB00707F86 /* GroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 066211B0234BA0AB00707F86 /* GroupCell.xib */; };
@@ -51,7 +50,6 @@
 		06312870232FE2A900272604 /* GroupAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAddViewController.swift; sourceTree = "<group>"; };
 		06312872232FE2D300272604 /* FriendFotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFotoViewController.swift; sourceTree = "<group>"; };
 		063695A52342052C00AE020D /* HeartControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartControll.swift; sourceTree = "<group>"; };
-		063F5FD82353071400ED8CA3 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		0651CD5A234926DD00F788E4 /* NameControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameControll.swift; sourceTree = "<group>"; };
 		0651CD5F234A557B00F788E4 /* FriendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		066211B0234BA0AB00707F86 /* GroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCell.xib; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 				06312870232FE2A900272604 /* GroupAddViewController.swift */,
 				06312872232FE2D300272604 /* FriendFotoViewController.swift */,
 				06EADFF9234E493A00AB62FC /* NewsViewController.swift */,
-				063F5FD82353071400ED8CA3 /* TestViewController.swift */,
 				3638BB3A2371CD87008EFDB4 /* TabBarController.swift */,
 			);
 			path = Controllers;
@@ -381,7 +378,6 @@
 				0631286D232FE24900272604 /* FriendsViewController.swift in Sources */,
 				36E1AE3623694DCF002B9DC9 /* VkAPI.swift in Sources */,
 				0668A6D92333602D001E4DBD /* FriendFotoCell.swift in Sources */,
-				063F5FD92353071400ED8CA3 /* TestViewController.swift in Sources */,
 				06C3C715234CF3A100918F8F /* CustomCollectionViewLayout.swift in Sources */,
 				06312871232FE2A900272604 /* GroupAddViewController.swift in Sources */,
 				06700D79232808840009B739 /* AppDelegate.swift in Sources */,

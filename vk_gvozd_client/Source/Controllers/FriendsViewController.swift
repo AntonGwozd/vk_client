@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct UserStruct {
     var letter: String
@@ -29,19 +30,30 @@ class FriendsViewController: UITableViewController {
     var sectionName: [String] = []
     var allFriendsStruct: [UserStruct] = []
     let vkAPI = VkAPI()
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Заполним массив именами
-        vkAPI.getFriensList( completion: {(friendArray) -> () in
-            self.allFriendsMaster = friendArray
-            self.allFriendsMaster.sort{ $0.userName < $1.userName }
-            self.allFriends = self.allFriendsMaster
-            self.createSectionArray()
-            self.createDict()
-            self.tableView.reloadData()
+        //Загрузим данные из кэша
+        reloadDataArray()
+        
+        //Запросим и заполним базу актуальными данными
+        vkAPI.getFriensList( completion: {(response) -> () in
+            try! self.realm.write {
+                self.realm.delete(self.realm.objects(VKUser.self))
+            }
+            for user in response.response.items {
+                let vkUser = VKUser()
+                vkUser.userName = user.last_name + " " + user.first_name
+                vkUser.id = user.id
+                vkUser.online = String(user.online)
+                vkUser.userAvatar = try? Data(contentsOf: URL(string: user.photo_50)!)
+                try! self.realm.write {
+                    self.realm.add(vkUser)
+                }
+            }
+            self.reloadDataArray()
         } )
-
 
         //регистрируем ксиб ячейки
         tableView.register(UINib(nibName: "FriendCell", bundle: nil), forCellReuseIdentifier: FriendsViewController.friendCellID)
@@ -61,8 +73,6 @@ class FriendsViewController: UITableViewController {
         createDict()
         tableView.reloadData()
     }
-    
-    
     
     //Имена секций
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -119,7 +129,7 @@ class FriendsViewController: UITableViewController {
         
         cell.friendNameLabel.text = allFriendsStruct[indexPath.section].users[indexPath.row].userName
         cell.friendFotoQuantLabel.text = "Фотографий: "
-        cell.friendAvatar.image = allFriendsStruct[indexPath.section].users[indexPath.row].userAvatar
+        cell.friendAvatar.image = UIImage(data: allFriendsStruct[indexPath.section].users[indexPath.row].userAvatar!)!
         
         return cell
     }
@@ -146,7 +156,17 @@ class FriendsViewController: UITableViewController {
             fotoController.owner_id = String(allFriendsStruct[indexPath.section].users[indexPath.row].id)
         }
     }
-        
+    
+    //MARK: Обработка словарей
+    func reloadDataArray() {
+        allFriendsMaster = Array(realm.objects(VKUser.self))
+        allFriendsMaster.sort{ $0.userName < $1.userName }
+        allFriends = self.allFriendsMaster
+        createSectionArray()
+        createDict()
+        tableView.reloadData()
+    }
+    
     //Протащим первую букву имени через множество и вернем ее массивом букв для имен секций
     func createSectionArray(){
         sectionName = []

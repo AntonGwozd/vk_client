@@ -7,5 +7,6 @@ target 'vk_gvozd_client' do
 
   # Pods for vk_gvozd_client
   pod 'Alamofire'
+  pod 'RealmSwift'
 
 end

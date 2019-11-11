@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct FotosJsData: Decodable {
     let response: FotosJsResponse
@@ -28,16 +29,16 @@ struct VKUserFotoLikes: Decodable {
     let count: Int
 }
 
-class VKUserFoto {
-    let id: Int
-    let image: UIImage
-    var likes: Int
-    var myLike: Int
+class VKUserFoto: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var image: Data? = nil
+    @objc dynamic var likes = 0
+    @objc dynamic var myLike = false
     
-    init (struckFoto: VKFotosNotImage, image: UIImage) {
-        self.id = struckFoto.id
-        self.image = image
-        self.likes = struckFoto.likes.count
-        self.myLike = struckFoto.likes.user_likes
-    }
+//    init (struckFoto: VKFotosNotImage, image: UIImage) {
+//        self.id = struckFoto.id
+//        self.image = image
+//        self.likes = struckFoto.likes.count
+//        self.myLike = struckFoto.likes.user_likes
+//    }
 }
