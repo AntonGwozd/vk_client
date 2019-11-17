@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +11,7 @@
         <!--Login Controller-->
         <scene sceneID="ZnO-Ia-Y0D">
             <objects>
-                <viewController id="XJA-Tp-HFT" customClass="VKLoginController" customModule="vk_gvozd_client" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VKLoginController" id="XJA-Tp-HFT" customClass="VKLoginController" customModule="vk_gvozd_client" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GoX-pb-gZl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,7 +185,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Wna-wx-iNm">
             <objects>
-                <tabBarController wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="aso-bW-Wgg" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ContentController" wantsFullScreenLayout="YES" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="aso-bW-Wgg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="FMR-jc-qfE"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XNS-wi-GEB">

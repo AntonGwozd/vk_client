@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 struct UserStruct {
     var letter: String
@@ -30,7 +29,7 @@ class FriendsViewController: UITableViewController {
     var sectionName: [String] = []
     var allFriendsStruct: [UserStruct] = []
     let vkAPI = VkAPI()
-    let realm = try! Realm()
+    let dataBase = DBClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +38,26 @@ class FriendsViewController: UITableViewController {
         
         //Запросим и заполним базу актуальными данными
         vkAPI.getFriensList( completion: {(response) -> () in
-            try! self.realm.write {
-                self.realm.delete(self.realm.objects(VKUser.self))
-            }
-            for user in response.response.items {
-                let vkUser = VKUser()
-                vkUser.userName = user.last_name + " " + user.first_name
-                vkUser.id = user.id
-                vkUser.online = String(user.online)
-                vkUser.userAvatar = try? Data(contentsOf: URL(string: user.photo_50)!)
-                try! self.realm.write {
-                    self.realm.add(vkUser)
+            
+            // если ответ с друзьями то чистим базу пользователй
+            if response.response.items.count != 0 {
+                self.dataBase.clearAllObjects(objectType: VKUser())
+                
+                //Строим новый массив и пишем в базу
+                for user in response.response.items {
+                    let vkUser = VKUser()
+                    vkUser.userName = user.last_name + " " + user.first_name
+                    vkUser.id = user.id
+                    vkUser.online = String(user.online)
+                    let avatarData = try? Data(contentsOf: URL(string: user.photo_50)!)
+                    let avatarName = String(user.id) + "_avatar"
+                    self.dataBase.saveData(fileData: avatarData!, fileName: avatarName)
+                    vkUser.userAvatar = avatarName
+                    self.dataBase.saveObject(object: vkUser)
                 }
             }
+            
+            //Обновим форму
             self.reloadDataArray()
         } )
 
@@ -129,7 +135,7 @@ class FriendsViewController: UITableViewController {
         
         cell.friendNameLabel.text = allFriendsStruct[indexPath.section].users[indexPath.row].userName
         cell.friendFotoQuantLabel.text = "Фотографий: "
-        cell.friendAvatar.image = UIImage(data: allFriendsStruct[indexPath.section].users[indexPath.row].userAvatar!)!
+        cell.friendAvatar.image = UIImage(data: self.dataBase.getData(fileName: allFriendsStruct[indexPath.section].users[indexPath.row].userAvatar))!
         
         return cell
     }
@@ -159,7 +165,7 @@ class FriendsViewController: UITableViewController {
     
     //MARK: Обработка словарей
     func reloadDataArray() {
-        allFriendsMaster = Array(realm.objects(VKUser.self))
+        allFriendsMaster = dataBase.getAllObjects(object: VKUser())
         allFriendsMaster.sort{ $0.userName < $1.userName }
         allFriends = self.allFriendsMaster
         createSectionArray()

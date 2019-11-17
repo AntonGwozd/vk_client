@@ -12,6 +12,7 @@ class GroupAddViewController: UITableViewController {
     
     static var groupCellID = "groupCell"
     var allGroup: [VKGroup] = []
+    let dataBase = DBClass()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ class GroupAddViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: GroupAddViewController.groupCellID, for: indexPath) as! GroupCell
         cell.groupNameLabel.text = allGroup[indexPath.row].groupName
-        cell.groupImageView.image = UIImage(data: allGroup[indexPath.row].groupAvatar!)!
+        cell.groupImageView.image = UIImage(data: dataBase.getData(fileName:  allGroup[indexPath.row].groupAvatar))!
         return cell
     }
     

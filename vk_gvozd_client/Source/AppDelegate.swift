@@ -7,15 +7,33 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //Конфигурация Realm
+        //let realmConfig = Realm.Configuration(schemaVersion: 0)
+        
+        //Конфигурация Realm для тестов
+        let realmConfig = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        
+        //Применние конфигурации Realm
+        Realm.Configuration.defaultConfiguration = realmConfig
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+
+        //Проверка корректных настроек, если они есть, то переходим сразу на таббар
+        let dataBase = DBClass()
+        if dataBase.existsUserSetting() {
+            let contenScreen = storyBoard.instantiateViewController(withIdentifier: "ContentController")
+            window?.rootViewController = contenScreen
+        }
+        
         return true
     }
 

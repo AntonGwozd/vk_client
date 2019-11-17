@@ -11,6 +11,7 @@ import RealmSwift
 
 struct FriendsJsData: Decodable {
     let response: FriensJsResponse
+    let error: ErrorJS?
 }
 
 struct FriensJsResponse: Decodable {
@@ -30,5 +31,9 @@ class VKUser: Object {
     @objc dynamic var id = 0
     @objc dynamic var online = ""
     @objc dynamic var userName = ""
-    @objc dynamic var userAvatar: Data? = nil
+    @objc dynamic var userAvatar = ""
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

@@ -11,6 +11,7 @@ import RealmSwift
 
 struct GroupsJsData: Decodable {
     let response: GroupsJsResponse
+    let error: ErrorJS?
 }
 
 struct GroupsJsResponse: Decodable {
@@ -27,5 +28,9 @@ struct VKGroupNotImage: Decodable{
 class VKGroup: Object {
     @objc dynamic var id = 0
     @objc dynamic var groupName = ""
-    @objc dynamic var groupAvatar: Data? = nil
+    @objc dynamic var groupAvatar = ""
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }

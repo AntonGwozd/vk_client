@@ -13,7 +13,7 @@ class GroupsViewController: UITableViewController {
 
     var vkGroup = [VKGroup]()
     let vkAPI = VkAPI()
-    let realm = try! Realm()
+    let dataBase = DBClass()
     static var groupCellID = "groupCell"
         
     override func viewDidLoad() {
@@ -23,19 +23,22 @@ class GroupsViewController: UITableViewController {
         
         //просим группы с сервера
         vkAPI.getUsersGroup( completion: {(response) -> () in
-            try! self.realm.write {
-                self.realm.delete(self.realm.objects(VKGroup.self))
-            }
-            for group in response.response.items {
-                let vkGroup = VKGroup()
-                vkGroup.id = group.id
-                vkGroup.groupName = group.name
-                vkGroup.groupAvatar = try? Data(contentsOf: URL(string: group.photo_50)!)
-                try! self.realm.write {
-                    self.realm.add(vkGroup)
+            if response.response.items.count != 0 {     //Если в ответе есть итемы
+                //почистим локальную базу перед записью
+                self.dataBase.clearAllObjects(objectType: VKGroup())
+                
+                for group in response.response.items {
+                    let vkGroup = VKGroup()
+                    vkGroup.id = group.id
+                    vkGroup.groupName = group.name
+                    let avatarData = try? Data(contentsOf: URL(string: group.photo_50)!)
+                    let avatarName = String(group.id) + "_group_avatar"
+                    self.dataBase.saveData(fileData: avatarData!, fileName: avatarName)
+                    vkGroup.groupAvatar = avatarName
+                    self.dataBase.saveObject(object: vkGroup)
                 }
+                self.reloadDataArray()
             }
-            self.reloadDataArray()
         })
         
         //регистрируем ксиб
@@ -47,12 +50,11 @@ class GroupsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vkGroup.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: GroupsViewController.groupCellID, for: indexPath) as! GroupCell
         cell.groupNameLabel.text = vkGroup[indexPath.row].groupName
-        cell.groupImageView.image = UIImage(data: vkGroup[indexPath.row].groupAvatar!)!
+        cell.groupImageView.image = UIImage(data: dataBase.getData(fileName: vkGroup[indexPath.row].groupAvatar))!
         return cell
     }
     
@@ -71,7 +73,7 @@ class GroupsViewController: UITableViewController {
 
     //MARK: Обработка словарей
     func reloadDataArray() {
-        vkGroup = Array(realm.objects(VKGroup.self))
+        vkGroup = dataBase.getAllObjects(object: VKGroup())
         vkGroup.sort{ $0.groupName < $1.groupName }
         tableView.reloadData()
     }

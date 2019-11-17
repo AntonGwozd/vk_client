@@ -13,6 +13,7 @@ import WebKit
 class VKLoginController: UIViewController {
     @IBOutlet weak var webView: WKWebView!
     var vkAPI = VkAPI()
+    let dataBase = DBClass()
     
     override func viewDidLoad() {
         vkAPI.authorize(webView: webView, viewController: self)
@@ -44,10 +45,23 @@ extension VKLoginController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
             })
-        let token = params!["access_token"]
-        Session.shared.token = token!
-        print("access toke: \(token!)")
+        let tokenVK = params?["access_token"]
+        let userIdVK = params?["user_id"]
+        
+        //выведем токен в консоль, что бы забирать в постман
+        print(tokenVK)
+        
+        Session.shared.token = tokenVK ?? ""
+        Session.shared.userId = Int(userIdVK ?? "") ?? 0
+        
+        let userSetting = dataBase.getUserSetting()
+        userSetting.pk = 0
+        userSetting.token = tokenVK ?? ""
+        userSetting.id = Int(userIdVK ?? "") ?? 0
+        dataBase.saveObject(object: userSetting)
+        
         decisionHandler(.cancel)
+        
         performSegue(withIdentifier: "fromLoginController", sender: nil)
     }
 }
