@@ -16,6 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let dataBase = DBClass()
+        //print(dataBase.realmFilePatch())
+        
+        //конфигурация сессии. нужна в realm для подписки на действительный токен.
+        
+        if dataBase.getObjects(object: SessionClass()).count == 0 {
+            let session = SessionClass()
+            dataBase.saveObject(object: session)
+        } else {
+            print (dataBase.getObjects(object: SessionClass()).first)
+        }
+        
         //Конфигурация Realm
         //let realmConfig = Realm.Configuration(schemaVersion: 0)
         
@@ -27,13 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
-        //Проверка корректных настроек, если они есть, то переходим сразу на таббар
-        let dataBase = DBClass()
-        if dataBase.existsUserSetting() {
+        //Проверка наличия токена в keychain
+        if dataBase.getKeyChain(key: "tokenVK") != "" && dataBase.getObjects(object: SessionClass()).first!.tokenIsCorrect == true {
             let contenScreen = storyBoard.instantiateViewController(withIdentifier: "ContentController")
             window?.rootViewController = contenScreen
+            window?.makeKeyAndVisible()
         }
-        
         return true
     }
 

@@ -46,19 +46,17 @@ extension VKLoginController: WKNavigationDelegate {
                 return dict
             })
         let tokenVK = params?["access_token"]
-        let userIdVK = params?["user_id"]
+        //let userIdVK = params?["user_id"]
         
         //выведем токен в консоль, что бы забирать в постман
-        print(tokenVK)
+        print("VK token:\n" + tokenVK!)
         
-        Session.shared.token = tokenVK ?? ""
-        Session.shared.userId = Int(userIdVK ?? "") ?? 0
-        
-        let userSetting = dataBase.getUserSetting()
-        userSetting.pk = 0
-        userSetting.token = tokenVK ?? ""
-        userSetting.id = Int(userIdVK ?? "") ?? 0
-        dataBase.saveObject(object: userSetting)
+        if tokenVK != nil {
+            dataBase.setKeyChain(key: "tokenVK", value: tokenVK!)
+            let session = SessionClass()
+            session.tokenIsCorrect = true
+            dataBase.saveObject(object: session)
+        }
         
         decisionHandler(.cancel)
         

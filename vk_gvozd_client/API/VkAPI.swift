@@ -12,14 +12,18 @@ import WebKit
 
 class VkAPI {
     var token: String
-    let APIVersion = Session.shared.vkAPIVersion
-    var vkClientID = Session.shared.vkClientID
+    let APIVersion: String
+    var vkClientID: String
     let dataBase = DBClass()
+    let fm = FMClass()
     
     
     init() {
-        let userSettings = dataBase.getUserSetting()
-        self.token = userSettings.token
+        self.token = self.dataBase.getKeyChain(key: "tokenVK")
+        //self.token = "5ac36b762b8e2b324476b20e972f2d31aa0cb5160dbedfc5dc7645b790fd9e32909c92ec965faaaae9002"
+        let session = dataBase.getObjects(object: SessionClass()).first
+        self.APIVersion = session?.vkAPIVersion ?? ""
+        self.vkClientID = session?.vkClientID ?? ""
     }
     
     //Возвращаем дефолтную строку с добавлением метода
@@ -52,7 +56,7 @@ class VkAPI {
     }
     
     //Функция типового обращения к серверу. возвращает response целиком
-    func vkMethod<T: Decodable>(url: URL, params: [String: Any], complitionHandler: @escaping (T) -> () ) {
+    func vkMethod<T: Decodable>(url: URL, params: [String: String], complitionHandler: @escaping (T) -> () )  {
         Alamofire.request(url, method: .get, parameters: params).responseData { response in
             guard let data = response.value else { return }
             do {
@@ -61,8 +65,11 @@ class VkAPI {
             } catch {
                 do {
                 let errorJson = try JSONDecoder().decode(ErrorJSData.self, from: data)
-                    print(errorJson.error.error_msg)
-                    //let result = T.self()
+                    if errorJson.error.error_code == 5 {
+                        let session = SessionClass()
+                        session.tokenIsCorrect = false
+                        self.dataBase.saveObject(object: session)
+                    }
                 } catch {
                     print("JSON decode error: \(error)")
                 }
@@ -80,10 +87,12 @@ class VkAPI {
             "access_token": token
         ]
         vkMethod(url: url, params: parameters, complitionHandler: completion)
+        
     }
     
     //запрос групп пользователя
-    func getUsersGroup(completion: @escaping ((GroupsJsData)->())){
+    //func getUsersGroup(completion: @escaping ((GroupsJsData)->())){
+    func getUsersGroup(){
         let url = defaultVKUrlMethod(method: "groups.get")
         let parameters = [
             "scope": "262150",
@@ -91,7 +100,22 @@ class VkAPI {
             "extended": "1",
             "access_token": token
         ]
-        vkMethod(url: url, params: parameters, complitionHandler: completion)
+        vkMethod(url: url, params: parameters, complitionHandler: {(response: GroupsJsData) -> () in
+            if response.response.items.count != 0 {     //Если в ответе есть итемы
+                //почистим локальную базу перед записью
+                self.dataBase.deleteObjects(objectType: VKGroup())
+                for group in response.response.items {
+                    let vkGroup = VKGroup()
+                    vkGroup.id = group.id
+                    vkGroup.groupName = group.name
+                    let avatarData = try? Data(contentsOf: URL(string: group.photo_50)!)
+                    let avatarName = String(group.id) + "_group_avatar"
+                    self.fm.saveData(fileData: avatarData!, fileName: avatarName)
+                    vkGroup.groupAvatar = avatarName
+                    self.dataBase.saveObject(object: vkGroup)
+                }
+            }
+        })
     }
     
     //запрос фотографий

@@ -8,58 +8,34 @@
 
 import Foundation
 import RealmSwift
+import KeychainAccess
 
 class DBClass {
     
-    let realm = try! Realm()
-    let fileManager = FileManager.default
-    let documentPatch: URL
-    
-    init() {
-        self.documentPatch = try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-    }
-    
-    //Функция возврата сохраненных настроек
-    func getUserSetting() -> UserSettings {
-        if self.existsUserSetting(){
-            return realm.objects(UserSettings.self).first!
-        } else {
-            let userSetting = UserSettings()
-            //userSetting.pk = 0
-            userSetting.id = 0
-            userSetting.token = ""
-            return userSetting
-        }
-    }
-    
-//    //Функция проверки наличия сохраненных настроек
-    func existsUserSetting() -> Bool {
-        if let userSettings = realm.objects(UserSettings.self).first,
-            userSettings.token != "" {
-            return true
-        } else {
-            return false
-        }
-    }
-    
+    let keychain = Keychain()
+        
     //Сохранение произвольного объекта в базу
     func saveObject<T: Object>(object: T) {
+        let realm = try! Realm()
         try! realm.write {
-            realm.add(object)
+            realm.add(object, update: .modified)
+            //realm.add(object)
         }
     }
     
     //Получим массив объектов
-    func getAllObjects<T: Object>(object: T, filter: String = "") -> [T] {
+    func getObjects<T: Object>(object: T, filter: String = "") -> Results<T> {
+        let realm = try! Realm()
         if filter == "" {
-            return Array(realm.objects(T.self))
+            return realm.objects(T.self)
         } else {
-            return Array(realm.objects(T.self).filter(filter))
+            return realm.objects(T.self).filter(filter)
         }
     }
     
     //очистим таблицу
-    func clearAllObjects<T: Object>(objectType: T, filter: String = "") {
+    func deleteObjects<T: Object>(objectType: T, filter: String = "") {
+        let realm = try! Realm()
         try! realm.write {
             if filter == "" {
                 realm.delete(realm.objects(T.self))
@@ -68,18 +44,25 @@ class DBClass {
             }
         }
     }
-    
-    //Функция сохранения картинки
-    func saveData(fileData: Data, fileName: String) {
-        let fullName = self.documentPatch.appendingPathComponent(fileName)
-        try! fileData.write(to: fullName)
+        
+    // функция записи в KeyChain
+    func setKeyChain(key: String, value: String) {
+        do {
+            try keychain.set(value, key: key)
+        } catch let error {
+            print(error)
+        }
     }
     
-    //Функция чтения картинки
-    func getData(fileName: String) -> Data {
-        let fullName = self.documentPatch.appendingPathComponent(fileName)
-        let fileData = try! Data(contentsOf: fullName)
-        return fileData
+    func getKeyChain(key: String) -> String {
+        do {
+            return try! (keychain.getString(key) ?? "")
+        }
+    }
+    
+    func realmFilePatch() -> URL {
+        let realm = try! Realm()
+        return(realm.configuration.fileURL!)
     }
     
 }

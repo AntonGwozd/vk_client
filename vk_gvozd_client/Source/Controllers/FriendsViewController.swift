@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct UserStruct {
     var letter: String
@@ -30,9 +31,27 @@ class FriendsViewController: UITableViewController {
     var allFriendsStruct: [UserStruct] = []
     let vkAPI = VkAPI()
     let dataBase = DBClass()
+    let fm = FMClass()
+    var token: NotificationToken?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        //Подписка на действительный токен
+//        if let session = dataBase.getObjects(object: SessionClass()).first {
+//            self.token = session.observe { change in
+//                switch change {
+//                case .change(let properties):
+//                    print(properties)
+//                case .error(let error):
+//                    print("An error occurred: \(error)")
+//                case .deleted:
+//                    print("The object was deleted.")
+//                }
+//            }
+//        }
+        
+
         //Загрузим данные из кэша
         reloadDataArray()
         
@@ -41,7 +60,7 @@ class FriendsViewController: UITableViewController {
             
             // если ответ с друзьями то чистим базу пользователй
             if response.response.items.count != 0 {
-                self.dataBase.clearAllObjects(objectType: VKUser())
+                self.dataBase.deleteObjects(objectType: VKUser())
                 
                 //Строим новый массив и пишем в базу
                 for user in response.response.items {
@@ -51,7 +70,7 @@ class FriendsViewController: UITableViewController {
                     vkUser.online = String(user.online)
                     let avatarData = try? Data(contentsOf: URL(string: user.photo_50)!)
                     let avatarName = String(user.id) + "_avatar"
-                    self.dataBase.saveData(fileData: avatarData!, fileName: avatarName)
+                    self.fm.saveData(fileData: avatarData!, fileName: avatarName)
                     vkUser.userAvatar = avatarName
                     self.dataBase.saveObject(object: vkUser)
                 }
@@ -60,7 +79,7 @@ class FriendsViewController: UITableViewController {
             //Обновим форму
             self.reloadDataArray()
         } )
-
+        
         //регистрируем ксиб ячейки
         tableView.register(UINib(nibName: "FriendCell", bundle: nil), forCellReuseIdentifier: FriendsViewController.friendCellID)
         
@@ -135,7 +154,7 @@ class FriendsViewController: UITableViewController {
         
         cell.friendNameLabel.text = allFriendsStruct[indexPath.section].users[indexPath.row].userName
         cell.friendFotoQuantLabel.text = "Фотографий: "
-        cell.friendAvatar.image = UIImage(data: self.dataBase.getData(fileName: allFriendsStruct[indexPath.section].users[indexPath.row].userAvatar))!
+        cell.friendAvatar.image = UIImage(data: self.fm.getData(fileName: allFriendsStruct[indexPath.section].users[indexPath.row].userAvatar))!
         
         return cell
     }
@@ -164,8 +183,9 @@ class FriendsViewController: UITableViewController {
     }
     
     //MARK: Обработка словарей
+    
     func reloadDataArray() {
-        allFriendsMaster = dataBase.getAllObjects(object: VKUser())
+        allFriendsMaster = Array(dataBase.getObjects(object: VKUser()))
         allFriendsMaster.sort{ $0.userName < $1.userName }
         allFriends = self.allFriendsMaster
         createSectionArray()

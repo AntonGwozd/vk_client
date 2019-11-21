@@ -13,6 +13,6 @@ struct ErrorJSData: Decodable {
 }
 
 struct ErrorJS: Decodable {
-    let error_code: Int
-    let error_msg: String
+    var error_code: Int
+    var error_msg: String
 }

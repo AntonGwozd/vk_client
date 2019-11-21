@@ -15,6 +15,7 @@ class FriendFotoViewController: UICollectionViewController {
     var owner_id = ""
     let vkAPI = VkAPI()
     let dataBase = DBClass()
+    let fm = FMClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +25,14 @@ class FriendFotoViewController: UICollectionViewController {
         vkAPI.getUserPhotos(owner_id: owner_id, completion: {(response) -> () in
             
             if response.response.items.count != 0 {
-                self.dataBase.clearAllObjects(objectType: VKUserFoto())
+                self.dataBase.deleteObjects(objectType: VKUserFoto())
                 for photo in response.response.items {
                     let vkFoto = VKUserFoto()
                     vkFoto.id = photo.id
                     vkFoto.owner_id = photo.owner_id
                     let photoData = try! Data(contentsOf: URL(string: photo.photo_75)!)
                     let photoName = self.owner_id + "-" + String(photo.id)
-                    self.dataBase.saveData(fileData: photoData, fileName: photoName)
+                    self.fm.saveData(fileData: photoData, fileName: photoName)
                     vkFoto.image = photoName
                     vkFoto.likes = photo.likes.count
                     vkFoto.myLike = photo.likes.user_likes != 0
@@ -51,7 +52,7 @@ class FriendFotoViewController: UICollectionViewController {
     
         //cell.friendNameLabel.text = userFoto[indexPath.row].userName
         //cell.friendNumberFotoLabel.text = userFoto[indexPath.row].numberFoto
-        cell.friendFotoImage.image = UIImage(data: dataBase.getData(fileName: userFoto[indexPath.row].image))!
+        cell.friendFotoImage.image = UIImage(data: fm.getData(fileName: userFoto[indexPath.row].image))!
         if userFoto[indexPath.row].myLike {
             cell.friendLikeValue.likeValue = false
         } else {
@@ -64,7 +65,7 @@ class FriendFotoViewController: UICollectionViewController {
     
     //MARK: Обработка словарей
     func reloadDataArray() {
-        userFoto = dataBase.getAllObjects(object: VKUserFoto(), filter: "owner_id = \(owner_id)")
+        userFoto = Array(dataBase.getObjects(object: VKUserFoto(), filter: "owner_id = \(owner_id)"))
         collectionView.reloadData()
     }
 

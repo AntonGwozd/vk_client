@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import RealmSwift
 
-class Session {
-    static let shared = Session()
-    private init () { }
+class SessionClass: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var userId = 0
+    @objc dynamic let vkAPIVersion = "5.68"
+    @objc dynamic let vkClientID = "7188698"
+    @objc dynamic var tokenIsCorrect = false
     
-    var token = String()
-    var userId = Int()
-    let vkAPIVersion = String("5.68")
-    let vkClientID = String("7188698")
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
